@@ -45,9 +45,13 @@ public final class Monstructor {
   }
 
   public boolean equals(Object obj) {
-    return (obj instanceof Monstructor) ? ((ctor == null) ? method.equals(((Monstructor) obj).method) : ctor.equals(((Monstructor) obj).ctor)) :
-        (obj instanceof Method) ? ((ctor == null) ? method.equals(obj) : false) :
-            (obj instanceof Constructor) ? ((ctor == null) ? ctor.equals(obj) : false) :
-                false;
+    if (obj instanceof Monstructor)
+      return (ctor == null) ? method.equals(((Monstructor)obj).method) : ctor.equals(((Monstructor)obj).ctor);
+    else if (obj instanceof Method)
+      return (ctor == null) ? method.equals(obj) : false;
+    else if (obj instanceof Constructor)
+      return (ctor == null) ? false : ctor.equals(obj);
+    else
+      return false;
   }
 }
