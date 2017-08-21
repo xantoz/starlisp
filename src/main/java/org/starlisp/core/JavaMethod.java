@@ -30,7 +30,7 @@ public final class JavaMethod extends LispFn {
     }
   }
 
-  // NEWTHING: what about accpetiong when the lispArg is null? (anything can be null except int,float etc. (not Integer,Float etc.)
+  // NEWTHING: what about accepting when the lispArg is null? (anything can be null except int,float etc. (not Integer,Float etc.)
   // Checks if lispArg can be cast to the class javaArg represents
   // TODO: Arrays maybe, but they currently lack autoconverting and stuff since it's such a pita
   // TODO: For numbers (at least integers) only accept if a conversion won't lose precision. (in fact with this in place i
