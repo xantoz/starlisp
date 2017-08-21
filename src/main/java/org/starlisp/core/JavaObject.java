@@ -19,7 +19,7 @@ public final class JavaObject extends LispFn {
     this.obj = obj;
     // klas = (obj != null) ? obj.getClass() : null;
     klas = obj.getClass();
-    Class storeKlas = (klas == Class.class) ? (Class) obj : klas; // We need to use obj as key when it is an instance of Class
+    Class storeKlas = (klas == Class.class) ? (Class)obj : klas; // We need to use obj as key when it is an instance of Class
     if (!methodMap.containsKey(storeKlas)) {
       methodMap.put(storeKlas, new HashMap<Symbol, Monstructor[]>());
     }
@@ -38,13 +38,12 @@ public final class JavaObject extends LispFn {
       // Special case when obj is a Class object (but not a Class object representing a Class object. That is: not Class.class):
       // Allow, in addition to accessing the methods of the object, access to static methods, and the constructors of the
       // class this object represents. If you are confused now blame Javas reflection API.
-      for (Method m : ((Class) obj).getMethods())       // Find static methods
+      for (Method m: ((Class)obj).getMethods())       // Find static methods
         if (Modifier.isStatic(m.getModifiers()) && m.getName().equals(sbl.name())) {
           methodList.add(new Monstructor(m));
         }
-      if (sbl == newInstance)                         // Yay, constructors! (Note: we do not try to fetch any more methods in  this case)
-      {
-        for (Constructor c : ((Class) obj).getConstructors())
+      if (sbl == newInstance) {     // Yay, constructors! (Note: we do not try to fetch any more methods in  this case)
+        for (Constructor c: ((Class)obj).getConstructors())
           methodList.add(new Monstructor(c));
       } else {
         for (Method m : klas.getMethods())
